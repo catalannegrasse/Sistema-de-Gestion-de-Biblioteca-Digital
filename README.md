@@ -1,6 +1,6 @@
-TRABAJO PRÁCTICO FINAL – UNIDAD I
+TRABAJO PRÁCTICO FINAL – GRUPO 3 
 
-Integrantes: Catalina Lannegrasse, 
+Integrantes: Catalina Lannegrasse, Gonzalo Cardenas , Ivan Molina , Ariel Arce.
 
 Consigna General
 
