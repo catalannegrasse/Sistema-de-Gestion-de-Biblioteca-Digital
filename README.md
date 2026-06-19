@@ -1,4 +1,4 @@
-TRABAJO PRÁCTICO FINAL – GRUPO 3 programacion avanzada
+TRABAJO PRÁCTICO FINAL – GRUPO 3 Programacion Avanzada
 
 Integrantes: Catalina Lannegrasse, Gonzalo Cardenas , Ivan Molina , Ariel Arce.
 
