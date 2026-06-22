@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+    <h3>Libros</h3>
+    <table class="table table-sm">
+      <thead><tr><th>Título</th><th>Autor</th><th>ISBN</th><th>Estado</th></tr></thead>
+      <tbody>
+        {% for b in biblioteca.libros %}
+        <tr>
+          <td>{{ b.titulo }}</td>
+          <td>{{ b.autor }}</td>
+          <td>{{ b.ISBN }}</td>
+          <td>{{ 'Prestado' if b.prestado else 'Disponible' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h5>Añadir libro</h5>
+    <form method="post" action="/agregar_libro" class="row g-2">
+      <div class="col-12"><input name="titulo" class="form-control" placeholder="Título" required></div>
+      <div class="col-6"><input name="autor" class="form-control" placeholder="Autor" required></div>
+      <div class="col-6"><input name="isbn" class="form-control" placeholder="ISBN" required></div>
+      <div class="col-6"><input name="anio" class="form-control" placeholder="Año"></div>
+      <div class="col-6"><input name="paginas" class="form-control" placeholder="Páginas"></div>
+      <div class="col-12"><button class="btn btn-primary">Agregar</button></div>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Clientes</h3>
+    <table class="table table-sm">
+      <thead><tr><th>Nombre</th><th>DNI</th><th>Correo</th><th>Rol</th></tr></thead>
+      <tbody>
+        {% for c in biblioteca.clientes %}
+        <tr>
+          <td>{{ c.nombre }} {{ c.apellido }}</td>
+          <td>{{ c.dni }}</td>
+          <td>{{ c.correo }}</td>
+          <td>{{ c.mostrar_rol() }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h5>Añadir cliente</h5>
+    <form method="post" action="/agregar_cliente" class="row g-2">
+      <div class="col-6"><input name="nombre" class="form-control" placeholder="Nombre" required></div>
+      <div class="col-6"><input name="apellido" class="form-control" placeholder="Apellido" required></div>
+      <div class="col-6"><input name="dni" class="form-control" placeholder="DNI" required></div>
+      <div class="col-6"><input name="correo" class="form-control" placeholder="Correo" required></div>
+      <div class="col-12">
+        <select name="tipo" class="form-select">
+          <option value="cliente">Cliente</option>
+          <option value="administrador">Administrador</option>
+        </select>
+      </div>
+      <div class="col-12"><button class="btn btn-primary">Agregar</button></div>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Registrar préstamo</h3>
+    <form method="post" action="/prestamo" class="row g-2">
+      <div class="col-6"><input name="cliente_dni" class="form-control" placeholder="DNI del cliente" required></div>
+      <div class="col-6"><input name="book_isbn" class="form-control" placeholder="ISBN del libro" required></div>
+      <div class="col-6"><input name="fecha" class="form-control" placeholder="Fecha (ej. 19/06)"></div>
+      <div class="col-12"><button class="btn btn-success">Prestar</button></div>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Registrar devolución</h3>
+    <form method="post" action="/devolucion" class="row g-2">
+      <div class="col-6"><input name="return_isbn" class="form-control" placeholder="ISBN del libro" required></div>
+      <div class="col-6"><input name="fecha_devolucion" class="form-control" placeholder="Fecha"></div>
+      <div class="col-12"><button class="btn btn-warning">Devolver</button></div>
+    </form>
+  </div>
+</div>
+
+<hr>
+<h3>Préstamos activos</h3>
+<table class="table table-sm">
+  <thead><tr><th>Libro</th><th>Cliente</th><th>Desde</th></tr></thead>
+  <tbody>
+    {% for p in biblioteca.prestamos %}
+      {% if p.fecha_devolucion is none %}
+      <tr>
+        <td>{{ p.libro.titulo }}</td>
+        <td>{{ p.cliente.nombre }} {{ p.cliente.apellido }}</td>
+        <td>{{ p.fecha_prestamo }}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
