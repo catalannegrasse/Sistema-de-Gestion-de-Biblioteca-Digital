@@ -2,6 +2,16 @@ TRABAJO PRÁCTICO FINAL – GRUPO 3 Programacion Avanzada
 
 Integrantes: Catalina Lannegrasse, Gonzalo Cardenas , Ivan Molina , Ariel Arce.
 
+Descripción del Sistema
+Este proyecto es un sistema de gestión para una biblioteca digital desarrollado en Python utilizando el paradigma de Programación Orientada a Objetos (POO). El software permite administrar de forma eficiente el catálogo de libros, el registro de usuarios con diferentes niveles de acceso, y el flujo completo de préstamos y devoluciones.
+
+Características y Decisiones de Diseño:
+* Gestión Completa (ABML): Permite el alta, baja, modificación y listado tanto de libros como de clientes, incluyendo validaciones para evitar ISBNs duplicados.
+* Metaclases y Polimorfismo: Se utiliza una metaclase (`MetaPersona`) para asegurar que todos los usuarios implementen obligatoriamente el método `mostrar_rol()`, diferenciando los permisos entre Clientes y Administradores.
+* Patrón Factory Method: Implementado en la clase `UsuarioFactory` para centralizar y desacoplar la creación de los distintos tipos de usuarios.
+* Decoradores: Se diseñó un decorador personalizado (`@validar_correo`) que audita y restringe el formato de los emails antes de guardarlos en el sistema.
+* Arquitectura UML: El diseño separa estrictamente las relaciones de Agregación (libros y clientes independientes) y Composición (los registros de préstamos, que dependen del ciclo de vida de la biblioteca).
+
 Consigna General
 
 Desarrollar una aplicación en Python denominada Sistema de Gestión de Biblioteca Digital. El sistema deberá permitir administrar libros, usuarios y préstamos utilizando Programación Orientada a Objetos.
